@@ -1,0 +1,263 @@
+basePath: /
+definitions:
+  entity.CreateAccountParams:
+    properties:
+      balance:
+        type: integer
+      currency:
+        type: string
+      owner_email:
+        type: string
+    type: object
+  entity.CreateClientParams:
+    properties:
+      user_email:
+        type: string
+      username:
+        type: string
+    type: object
+  entity.CreateTransactionParams:
+    properties:
+      amount:
+        type: integer
+      from_account_id:
+        type: integer
+      to_account_id:
+        type: integer
+      type:
+        type: string
+    type: object
+  http.response:
+    properties:
+      error:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: REST API
+  title: bank api
+  version: "1.0"
+paths:
+  /api/account:
+    get:
+      description: get account
+      parameters:
+      - description: account id
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http.response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http.response'
+      tags:
+      - account
+  /api/account/create:
+    post:
+      consumes:
+      - application/json
+      description: create account
+      parameters:
+      - description: account info
+        in: body
+        name: accountParams
+        required: true
+        schema:
+          $ref: '#/definitions/entity.CreateAccountParams'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http.response'
+      tags:
+      - account
+  /api/account/list:
+    get:
+      description: get accounts list
+      parameters:
+      - description: user email
+        in: query
+        name: user_email
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http.response'
+      tags:
+      - account
+  /api/client:
+    get:
+      description: get client
+      parameters:
+      - description: user email
+        in: query
+        name: user_email
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http.response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http.response'
+      tags:
+      - client
+  /api/client/create:
+    post:
+      consumes:
+      - application/json
+      description: create client
+      parameters:
+      - description: client info
+        in: body
+        name: clientParams
+        required: true
+        schema:
+          $ref: '#/definitions/entity.CreateClientParams'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http.response'
+      tags:
+      - client
+  /api/client/list:
+    get:
+      description: get clients list
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http.response'
+      tags:
+      - client
+  /api/transaction:
+    get:
+      description: get transaction
+      parameters:
+      - description: transaction id
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http.response'
+      tags:
+      - transaction
+  /api/transaction/create:
+    post:
+      consumes:
+      - application/json
+      description: create transaction
+      parameters:
+      - description: transaction info
+        in: body
+        name: transactionParams
+        required: true
+        schema:
+          $ref: '#/definitions/entity.CreateTransactionParams'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http.response'
+      tags:
+      - transaction
+  /api/transaction/list:
+    get:
+      description: get transactions list
+      parameters:
+      - description: account id
+        in: query
+        name: account_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http.response'
+      tags:
+      - transaction
+swagger: "2.0"
