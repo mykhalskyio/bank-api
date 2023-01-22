@@ -5,7 +5,6 @@ type Client struct {
 	Username  string `db:"username" json:"username"`
 	UserEmail string `db:"user_email" json:"user_email"`
 	CreatedAt string `db:"created_at" json:"created_at"`
-	UpdatedAt string `db:"updated_at" json:"updated_at"`
 }
 
 type CreateClientParams struct {
