@@ -23,7 +23,7 @@ Clone repository
 
 Build and Run
 
-    $ make build
+    $ make start
 
 Run migrate up
 
